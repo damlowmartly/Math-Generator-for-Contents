@@ -207,34 +207,6 @@ function createStepCanvas(stepIndex, stepData, totalSteps) {
     ctx.stroke();
   }
 
-  // Step counter pill (top-right)
-  const pillText = `${stepIndex + 1} / ${totalSteps}`;
-  ctx.font = '500 13px "DM Mono", monospace';
-  const pillW = ctx.measureText(pillText).width + 20;
-  const pillX = IMG_W - pillW - 20;
-  ctx.fillStyle = label === 'Question' || label === 'Answer'
-    ? 'rgba(255,255,255,0.12)'
-    : 'rgba(26,18,8,0.07)';
-  roundRect(ctx, pillX, 16, pillW, 26, 13);
-  ctx.fillStyle = colors.sub;
-  ctx.textBaseline = 'middle';
-  ctx.textAlign = 'center';
-  ctx.fillText(pillText, pillX + pillW / 2, 29);
-
-  // Label badge
-  const badgeX = label === 'Question' || label === 'Answer' ? 28 : 72;
-  ctx.font = '700 11px "DM Sans", sans-serif';
-  ctx.letterSpacing = '2px';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'top';
-
-  const badgeLabel = label.toUpperCase();
-  const badgeW = ctx.measureText(badgeLabel).width + 18;
-  ctx.fillStyle = colors.accent;
-  roundRect(ctx, badgeX, 24, badgeW, 22, 3);
-  ctx.fillStyle = label === 'Question' ? '#1a1208' : (label === 'Answer' ? '#1a1208' : '#fdfbf6');
-  ctx.fillText(badgeLabel, badgeX + 9, 30);
-
   // Main math expression
   ctx.font = `500 ${math.length > 16 ? 40 : 52}px "DM Mono", monospace`;
   ctx.fillStyle = colors.text;
