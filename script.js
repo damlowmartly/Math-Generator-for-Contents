@@ -75,88 +75,91 @@ function generateProblem(type, config) {
 
   switch (type) {
     case 'linear_equations': {
-      // ax + b = c  →  x = (c - b) / a
+      // 5x + 5 = 10 -> 5x = 10 - 5 -> 5x = 5 -> 5x/5 = 5/5 -> x = 1
       const a = randInt(2, Math.min(max, 10));
       const x = randInt(min, max);
       const b = randInt(min, max);
       const c = a * x + b;
+      const diff = c - b;
       return {
         question: `${a}x + ${b} = ${c}`,
         steps: [
-          { label: 'Question',    math: `${a}x + ${b} = ${c}`,        note: 'Start with the original equation.' },
-          { label: 'Step 1',      math: `${a}x = ${c} - ${b}`,        note: `Subtract ${b} from both sides.` },
-          { label: 'Step 2',      math: `${a}x = ${c - b}`,           note: 'Simplify the right side.' },
-          { label: 'Answer',      math: `x = ${(c - b) / a}`,         note: `Divide both sides by ${a}.` },
+          { math: `${a}x + ${b} = ${c}` },
+          { math: `${a}x = ${c} - ${b}` },
+          { math: `${a}x = ${diff}` },
+          { math: `${a}x/${a} = ${diff}/${a}` },
+          { math: `x = ${x}` },
         ]
       };
     }
 
     case 'simple_inequalities': {
-      // ax + b > c  →  x > (c - b) / a
+      // 5x + 5 > 10 -> 5x > 10 - 5 -> 5x > 5 -> 5x/5 > 5/5 -> x > 1
       const a = randInt(2, Math.min(max, 8));
-      const b = randInt(min, max);
       const x = randInt(min, max);
+      const b = randInt(min, max);
       const c = a * x + b - randInt(1, 5);
       const symbols = ['>', '<', '≥', '≤'];
       const sym = symbols[Math.floor(Math.random() * symbols.length)];
-      const rhs = c;
-      const lhsMinusB = rhs - b;
-      const solveVal = lhsMinusB / a;
-      const solveStr = Number.isInteger(solveVal) ? `${solveVal}` : `${lhsMinusB}/${a}`;
+      const diff = c - b;
+      const solveStr = Number.isInteger(diff / a) ? `${diff / a}` : `${diff}/${a}`;
       return {
-        question: `${a}x + ${b} ${sym} ${rhs}`,
+        question: `${a}x + ${b} ${sym} ${c}`,
         steps: [
-          { label: 'Question', math: `${a}x + ${b} ${sym} ${rhs}`,    note: 'Start with the original inequality.' },
-          { label: 'Step 1',   math: `${a}x ${sym} ${rhs} - ${b}`,    note: `Subtract ${b} from both sides.` },
-          { label: 'Step 2',   math: `${a}x ${sym} ${lhsMinusB}`,     note: 'Simplify the right side.' },
-          { label: 'Answer',   math: `x ${sym} ${solveStr}`,           note: `Divide both sides by ${a}.` },
+          { math: `${a}x + ${b} ${sym} ${c}` },
+          { math: `${a}x ${sym} ${c} - ${b}` },
+          { math: `${a}x ${sym} ${diff}` },
+          { math: `${a}x/${a} ${sym} ${diff}/${a}` },
+          { math: `x ${sym} ${solveStr}` },
         ]
       };
     }
 
     case 'two_step_equations': {
-      // ax - b = c  →  x = (c + b) / a
+      // 5x - 5 = 10 -> 5x = 10 + 5 -> 5x = 15 -> 5x/5 = 15/5 -> x = 3
       const a = randInt(2, Math.min(max, 10));
       const x = randInt(min, max);
       const b = randInt(min, max);
       const c = a * x - b;
+      const sum = c + b;
       return {
         question: `${a}x - ${b} = ${c}`,
         steps: [
-          { label: 'Question', math: `${a}x - ${b} = ${c}`,         note: 'Start with the original equation.' },
-          { label: 'Step 1',   math: `${a}x = ${c} + ${b}`,         note: `Add ${b} to both sides.` },
-          { label: 'Step 2',   math: `${a}x = ${c + b}`,            note: 'Simplify the right side.' },
-          { label: 'Answer',   math: `x = ${(c + b) / a}`,          note: `Divide both sides by ${a}.` },
+          { math: `${a}x - ${b} = ${c}` },
+          { math: `${a}x = ${c} + ${b}` },
+          { math: `${a}x = ${sum}` },
+          { math: `${a}x/${a} = ${sum}/${a}` },
+          { math: `x = ${x}` },
         ]
       };
     }
 
     case 'multiplication_equations': {
-      // ax = b  →  x = b / a
+      // 4x = 20 -> 4x/4 = 20/4 -> x = 5
       const a = randInt(2, Math.min(max, 10));
       const x = randInt(min, max);
       const b = a * x;
       return {
         question: `${a}x = ${b}`,
         steps: [
-          { label: 'Question', math: `${a}x = ${b}`,                 note: 'Start with the original equation.' },
-          { label: 'Step 1',   math: `x = ${b} ÷ ${a}`,             note: `Divide both sides by ${a}.` },
-          { label: 'Answer',   math: `x = ${x}`,                     note: 'Simplify.' },
+          { math: `${a}x = ${b}` },
+          { math: `${a}x/${a} = ${b}/${a}` },
+          { math: `x = ${x}` },
         ]
       };
     }
 
     case 'subtraction_equations': {
-      // x - a = b  →  x = b + a
+      // x - 4 = 9 -> x = 9 + 4 -> x = 13
       const a = randInt(min, max);
       const b = randInt(min, max);
       const x = a + b;
       return {
         question: `x - ${a} = ${b}`,
         steps: [
-          { label: 'Question', math: `x - ${a} = ${b}`,             note: 'Start with the original equation.' },
-          { label: 'Step 1',   math: `x = ${b} + ${a}`,             note: `Add ${a} to both sides.` },
-          { label: 'Answer',   math: `x = ${x}`,                    note: 'Simplify.' },
+          { math: `x - ${a} = ${b}` },
+          { math: `x = ${b} + ${a}` },
+          { math: `x = ${x}` },
         ]
       };
     }
@@ -267,16 +270,15 @@ function renderTextSteps(steps) {
     item.className = 'step-item';
     item.style.animationDelay = `${i * 0.07}s`;
 
-    const numClass = step.label === 'Question' ? 'question-num'
-                   : step.label === 'Answer' ? 'answer-num' : '';
-    const numContent = step.label === 'Answer' ? '✓' : (i + 1);
+    const isLast = i === steps.length - 1;
+    const isFirst = i === 0;
+    const numClass = isFirst ? 'question-num' : isLast ? 'answer-num' : '';
+    const numContent = isLast ? '✓' : (i + 1);
 
     item.innerHTML = `
       <div class="step-num ${numClass}">${numContent}</div>
       <div class="step-content">
-        <div class="step-label">${step.label}</div>
         <div class="step-math">${step.math}</div>
-        ${step.note ? `<div class="step-note">${step.note}</div>` : ''}
       </div>
     `;
     list.appendChild(item);
@@ -294,18 +296,19 @@ function renderDownloadThumbs(steps) {
     const wrap = document.createElement('div');
     wrap.className = 'dl-thumb';
     wrap.style.animationDelay = `${i * 0.07 + 0.1}s`;
-    wrap.title = `Download ${step.label}`;
+    const thumbLabel = i === 0 ? 'Question' : i === steps.length - 1 ? 'Answer' : `Step ${i}`;
+    wrap.title = `Download ${thumbLabel}`;
 
     const lbl = document.createElement('div');
     lbl.className = 'dl-thumb-label';
-    lbl.textContent = step.label;
+    lbl.textContent = thumbLabel;
 
     wrap.appendChild(canvas);
     wrap.appendChild(lbl);
 
     wrap.addEventListener('click', () => {
-      downloadCanvas(canvas, `step_${i + 1}_${step.label.toLowerCase().replace(' ', '_')}`);
-      showToast(`Downloaded: ${step.label}`);
+      downloadCanvas(canvas, `step_${i + 1}`);
+      showToast(`Downloaded step ${i + 1}`);
     });
 
     grid.appendChild(wrap);
@@ -315,7 +318,7 @@ function renderDownloadThumbs(steps) {
 function autoDownloadAll(steps, type) {
   steps.forEach((step, i) => {
     const canvas = createStepCanvas(i, step, steps.length);
-    const name = `${type}_step${i + 1}_${step.label.toLowerCase().replace(/\s+/g, '_')}`;
+    const name = `${type}_step${i + 1}`;
     // Stagger downloads slightly to avoid browser blocking
     setTimeout(() => downloadCanvas(canvas, name), i * 150);
   });
@@ -333,7 +336,7 @@ document.getElementById('btn-download-all').addEventListener('click', () => {
   const type = document.getElementById('problem-type').value;
   generatedSteps.forEach((step, i) => {
     const canvas = createStepCanvas(i, step, generatedSteps.length);
-    const name = `${type}_step${i + 1}_${step.label.toLowerCase().replace(/\s+/g, '_')}`;
+    const name = `${type}_step${i + 1}`;
     setTimeout(() => downloadCanvas(canvas, name), i * 150);
   });
   showToast(`Re-downloading ${generatedSteps.length} images…`);
