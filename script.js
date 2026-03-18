@@ -171,9 +171,7 @@ const IMG_W = 600;
 const IMG_H = 300;
 
 function getStepColors(label) {
-  if (label === 'Question')  return { bg: '#1a1208', accent: '#e8a020', text: '#fdf3dc', sub: '#9a8f7f' };
-  if (label === 'Answer')    return { bg: '#2a7a4a', accent: '#7dcca0', text: '#f0faf4', sub: '#aad6bb' };
-  return                            { bg: '#fdfbf6', accent: '#1a1208', text: '#1a1208', sub: '#9a8f7f' };
+  return { bg: '#000000', accent: '#ffffff', text: '#ffffff', sub: '#888888' };
 }
 
 function createStepCanvas(stepIndex, stepData, totalSteps) {
@@ -187,25 +185,6 @@ function createStepCanvas(stepIndex, stepData, totalSteps) {
   // Background
   ctx.fillStyle = colors.bg;
   ctx.fillRect(0, 0, IMG_W, IMG_H);
-
-  // Subtle grid lines (for non-dark cards)
-  if (label !== 'Question' && label !== 'Answer') {
-    ctx.strokeStyle = 'rgba(200,185,160,0.4)';
-    ctx.lineWidth = 1;
-    for (let y = 28; y < IMG_H; y += 28) {
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(IMG_W, y);
-      ctx.stroke();
-    }
-    // Margin line
-    ctx.strokeStyle = 'rgba(200,134,10,0.18)';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(56, 0);
-    ctx.lineTo(56, IMG_H);
-    ctx.stroke();
-  }
 
   // Main math expression
   ctx.font = `500 ${math.length > 16 ? 40 : 52}px "DM Mono", monospace`;
