@@ -1,0 +1,27 @@
+{
+  "linear_equations": {
+    "description": "Solve simple linear equations where x is unknown, for example equations like ax + b = c.",
+    "min": 1,
+    "max": 20
+  },
+  "simple_inequalities": {
+    "description": "Solve basic inequalities using integers between 1 and 20, for example ax + b > c.",
+    "min": 1,
+    "max": 20
+  },
+  "two_step_equations": {
+    "description": "Solve two-step equations requiring two operations to isolate x, for example ax - b = c.",
+    "min": 1,
+    "max": 20
+  },
+  "multiplication_equations": {
+    "description": "Solve equations where x is multiplied by a constant, for example ax = b.",
+    "min": 1,
+    "max": 20
+  },
+  "subtraction_equations": {
+    "description": "Solve equations involving subtraction where x is unknown, for example x - a = b.",
+    "min": 1,
+    "max": 20
+  }
+}
