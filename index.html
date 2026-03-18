@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algebra Problem Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Header -->
+    <header>
+      <div class="logo-row">
+        <div class="logo-icon">x</div>
+        <h1>Algebra <em>Generator</em></h1>
+      </div>
+      <p class="subtitle">Step-by-step solutions · One image per step · Auto-download</p>
+    </header>
+
+    <!-- Generator Card -->
+    <div class="card">
+      <div class="form-group">
+        <label for="problem-type">Problem Type</label>
+        <select id="problem-type"></select>
+        <p class="type-description" id="type-desc"></p>
+      </div>
+
+      <button class="btn-generate" id="btn-generate">
+        Generate Question
+      </button>
+    </div>
+
+    <!-- Steps Output -->
+    <div id="steps-container">
+      <div class="card">
+        <div class="steps-header">
+          <span class="steps-title">Solution Steps</span>
+          <span class="steps-badge" id="steps-badge">0 steps</span>
+        </div>
+
+        <div class="steps-list" id="steps-list"></div>
+
+        <div class="download-section">
+          <div class="download-label">Step Images — click to re-download</div>
+          <div class="download-grid" id="download-grid"></div>
+          <button class="btn-download-all" id="btn-download-all">
+            ↓ Download All Images Again
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Hidden canvas used internally -->
+  <canvas id="gen-canvas"></canvas>
+
+  <!-- Toast notification -->
+  <div id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
